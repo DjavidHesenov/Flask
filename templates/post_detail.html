@@ -12,6 +12,8 @@
         <p>{{ article.intro }}</p><br>
         <p>{{ article.content}}</p>
         <p>Posted at: {{ article.date.date()}}</p>
+        <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Delete</a>
+        <a href="/posts/{{ article.id }}/update" class="btn btn-success">Redact</a>
     </div>
 </div>
 {% endblock %}

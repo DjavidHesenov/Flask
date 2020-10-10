@@ -43,6 +43,36 @@ def post_detail(id):
     return render_template("post_detail.html", article=article)
 
 
+@app.route('/posts/<int:id>/del')
+def post_delete(id):
+    article = Article.query.get_or_404(id)
+
+    try:
+        db.session.delete(article)
+        db.session.commit()
+        return redirect('/posts')
+    except:
+        return "Error occured"
+
+
+@app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
+def post_update(id):
+    article = Article.query.get(id)
+    if request.method == "POST":
+         article.title = request.form['title']
+         article.intro = request.form['intro']
+         article.content = request.form['content']
+
+         try:
+             db.session.commit()
+             return redirect('/posts')
+         except:
+             return "Error occured"
+
+    else:
+        return render_template("post-update.html", article=article)
+
+
 @app.route('/create-article', methods=['POST', 'GET'])
 def create_article():
     if request.method == "POST":

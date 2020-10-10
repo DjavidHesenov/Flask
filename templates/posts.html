@@ -8,13 +8,17 @@ All articles.
 <div class="container mt-5">
     <h1>All Posts</h1>
 
-    {% for x in articles %}
-    <div class="alert alert-info">
-        <h2>{{ x.title }}</h2>
-        <p>{{ x.intro }}</p>
-        <p>Posted at: {{ x.date.date()}}</p>
-        <a href="/posts/{{ x.id }}" class="btn btn-warning">Details</a>
-    </div>
-    {% endfor %}
+    {% if articles|length > 0 %}
+        {% for x in articles %}
+        <div class="alert alert-info">
+            <h2>{{ x.title }}</h2>
+            <p>{{ x.intro }}</p>
+            <p>Posted at: {{ x.date.date()}}</p>
+            <a href="/posts/{{ x.id }}" class="btn btn-warning">Details</a>
+        </div>
+        {% endfor %}
+    {% else %}
+    <p>We don't have articles yet</p>
+    {% endif %}
 </div>
 {% endblock %}
